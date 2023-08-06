@@ -51,7 +51,7 @@ const displayCurrentWeather = (data) => {
 const displayForecast = (data) => {
   const forecastEl = document.querySelector(".forecast");
   forecastEl.innerHTML = "";
-  for (let i = 0; i < 5; i++) {
+  for (let i = 1; i <= 5; i++) {
     const { city, list } = data;
     const { name } = city;
     const { dt, weather, main, wind } = list[i * 8];
