@@ -29,9 +29,9 @@ const displayCurrentWeather = (data) => {
   currentEl.innerHTML = `
     <h2>${name} ${formattedDate}</h2>
     <img src="${iconUrl}" alt="Weather Icon">
-    <p>temperature: ${main.temp} F</p>
-    <p>humidity: ${main.humidity} %</p>
-    <p>wind speed: ${wind.speed} mph</p>
+    <p>Temp: ${main.temp} F</p>
+    <p>Humidity: ${main.humidity} %</p>
+    <p>Wind Speed: ${wind.speed} mph</p>
   `;
 };
 
@@ -49,9 +49,9 @@ const displayForecast = (data) => {
     card.innerHTML += `
       <h3>${name} ${formattedDate}</h3>
       <img src="${iconUrl}" alt="Weather Icon">
-      <p>temperature: ${main.temp} F</p>
-      <p>humidity: ${main.humidity} %</p>
-      <p>wind speed: ${wind.speed} mph</p>
+      <p>Temp: ${main.temp} F</p>
+      <p>Humidity: ${main.humidity} %</p>
+      <p>Wind Speed: ${wind.speed} mph</p>
     `;
     forecastEl.append(card);
   }
@@ -72,7 +72,7 @@ const populateCityButtons = () => {
   cities.forEach((city) => {
     const cityButton = document.createElement("button");
     cityButton.textContent = city;
-    cityButton.classList.add("city-button", "btn", "btn-secondary", "mb-2");
+    cityButton.classList.add("city-button", "btn", "d-flex", "column", "btn-secondary", "mb-2");
     cityButton.addEventListener("click", () => {
       searchByCity(city);
     });

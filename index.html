@@ -19,23 +19,28 @@
             Weather Dashboard
         </header>
 
-        <section class="search">
-            <input type="text" class="input" />
-            <button>Search</button>
-            <button class="clear">Clear</button>
-        </section>
-
-        <section class="history d-flex-column">
-
-        </section>
-
-        <section class="current">
-
-        </section>
-
-        <section class="forecast bg-dark text-white">
-
-        </section>
+        <div class="container mt-5">
+            <div class="row">
+              <div class="col-lg-3">
+                <div class="search mb-2">
+                  <input type="text" class="form-control" placeholder="Enter city">
+                  <button class="btn btn-primary mt-2">Search</button>
+                </div>
+                <div class="history">
+                  <!-- City buttons will be populated here -->
+                </div>
+                <button class="btn btn-danger clear">Clear History</button>
+              </div>
+              <div class="col-lg-6">
+                <div class="current">
+                  <!-- Current weather data will be displayed here -->
+                </div>
+                <div class="forecast mt-3 d-flex">
+                  <!-- 5-day forecast data will be displayed here -->
+                </div>
+              </div>
+            </div>
+          </div>
 
     </main>
 

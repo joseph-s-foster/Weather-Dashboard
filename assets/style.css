@@ -4,20 +4,13 @@ header{
 }
 
 .forecast {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
     max-width: 100%;
     width: 100%;
 }
 
 .five-day {
-    flex-basis: 15%;
     padding: 0 15px 0 15px;
     background-color: black;
     color: white;
-    flex-wrap: wrap;
-    display: flex;
-    margin-top: 20px;
+    margin-right: 5px;
 }
