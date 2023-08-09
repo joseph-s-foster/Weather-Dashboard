@@ -1,24 +1,11 @@
 const apikey = "7761e5644bf2af39970d6760ed459312";
 
-const handleSearch = async () => {
-  const city = document.querySelector(".search input").value;
-  if (!city) return;
-  const currentWeatherData = await fetchWeatherData(
-    `https://api.openweathermap.org/data/2.5/weather?appid=${apikey}&q=${city}&units=imperial`
-  );
-  if (currentWeatherData) {
-    displayCurrentWeather(currentWeatherData);
-    const forecastData = await fetchWeatherData(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${currentWeatherData.coord.lat}&lon=${currentWeatherData.coord.lon}&units=imperial&appid=${apikey}`
-    );
-    if (forecastData) displayForecast(forecastData);
-  }
-};
-
 const fetchWeatherData = async (url) => {
   try {
     const response = await fetch(url);
-    if (response.ok) return await response.json();
+    if (response.ok) {
+      return await response.json();
+    }
     throw new Error("Network response was not ok.");
   } catch (error) {
     console.error("Error fetching weather data:", error);
@@ -52,19 +39,88 @@ const displayForecast = (data) => {
   const forecastEl = document.querySelector(".forecast");
   forecastEl.innerHTML = "";
   for (let i = 1; i <= 5; i++) {
+    const card = document.createElement("div");
+    card.classList.add("five-day");
     const { city, list } = data;
     const { name } = city;
-    const { dt, weather, main, wind } = list[i * 8];
+    const { dt, weather, main, wind } = list[i * 8 - 1];
     const iconUrl = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
     const formattedDate = convertUnixTimestampToDate(dt);
-    forecastEl.innerHTML += `
+    card.innerHTML += `
       <h3>${name} ${formattedDate}</h3>
       <img src="${iconUrl}" alt="Weather Icon">
       <p>temperature: ${main.temp} F</p>
       <p>humidity: ${main.humidity} %</p>
       <p>wind speed: ${wind.speed} mph</p>
     `;
+    forecastEl.append(card);
   }
 };
 
-document.querySelector(".search button").addEventListener("click", handleSearch);
+const saveCityToLocalStorage = (city) => {
+  const cities = JSON.parse(localStorage.getItem("cities")) || [];
+  if (!cities.includes(city)) {
+    cities.push(city);
+    localStorage.setItem("cities", JSON.stringify(cities));
+  }
+};
+
+const populateCityButtons = () => {
+  const cities = JSON.parse(localStorage.getItem("cities")) || [];
+  const historyEl = document.querySelector(".history");
+  historyEl.innerHTML = "";
+  cities.forEach((city) => {
+    const cityButton = document.createElement("button");
+    cityButton.textContent = city;
+    cityButton.classList.add("city-button", "btn", "btn-secondary", "mb-2");
+    cityButton.addEventListener("click", () => {
+      searchByCity(city);
+    });
+    historyEl.appendChild(cityButton);
+  });
+};
+
+const searchByCity = async (city) => {
+  const currentWeatherData = await fetchWeatherData(
+    `https://api.openweathermap.org/data/2.5/weather?appid=${apikey}&q=${city}&units=imperial`
+  );
+  if (currentWeatherData) {
+    displayCurrentWeather(currentWeatherData);
+    const forecastData = await fetchWeatherData(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${currentWeatherData.coord.lat}&lon=${currentWeatherData.coord.lon}&units=imperial&appid=${apikey}`
+    );
+    if (forecastData) displayForecast(forecastData);
+  }
+};
+
+document.querySelector(".search button").addEventListener("click", () => {
+  const city = document.querySelector(".search input").value;
+  if (city) {
+    handleSearch(city);
+  }
+});
+
+document.querySelector(".clear").addEventListener("click", () => {
+  localStorage.removeItem("cities");
+  const historyEl = document.querySelector(".history");
+  historyEl.innerHTML = "";
+});
+
+const handleSearch = async (city) => {
+  const currentWeatherData = await fetchWeatherData(
+    `https://api.openweathermap.org/data/2.5/weather?appid=${apikey}&q=${city}&units=imperial`
+  );
+  if (currentWeatherData) {
+    displayCurrentWeather(currentWeatherData);
+    const forecastData = await fetchWeatherData(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${currentWeatherData.coord.lat}&lon=${currentWeatherData.coord.lon}&units=imperial&appid=${apikey}`
+    );
+    if (forecastData) {
+      displayForecast(forecastData);
+      saveCityToLocalStorage(city);
+      populateCityButtons();
+    }
+  }
+};
+
+populateCityButtons();
