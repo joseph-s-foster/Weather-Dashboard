@@ -4,7 +4,9 @@ const fetchWeatherData = async (url) => {
   try {
     const response = await fetch(url);
     if (response.ok) {
-      return await response.json();
+      const data = await response.json();
+      console.log(data)
+      return data;
     }
     throw new Error("Network response was not ok.");
   } catch (error) {
@@ -104,6 +106,8 @@ document.querySelector(".clear").addEventListener("click", () => {
   localStorage.removeItem("cities");
   const historyEl = document.querySelector(".history");
   historyEl.innerHTML = "";
+  console.clear();
+  window.location.replace("index.html");
 });
 
 const handleSearch = async (city) => {
