@@ -1,16 +1,30 @@
 header{
     width: 100%;
-    font-size: 3rem;
+    font-size: 2rem;
+}
+
+.current {
+    text-align: center;
+    padding: 0 15px 0 15px;
+    background-color: #343a40;
+    color: white;
+    margin-left: 4px;
+    margin-top: 4px;
+    margin-right: 4px;
+    margin-bottom: 0px;
 }
 
 .forecast {
     max-width: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .five-day {
+    text-align: center;
     padding: 0 15px 0 15px;
     background-color: #343a40;
     color: white;
-    margin-right: 5px;
+    margin: 4px;
 }

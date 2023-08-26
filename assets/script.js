@@ -15,27 +15,34 @@ const fetchWeatherData = async (url) => {
   }
 };
 
-const convertUnixTimestampToDate = (timestamp) => {
+const displayDay = (timestamp) => {
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const date = new Date(timestamp * 1000);
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  const year = date.getFullYear();
-  return `${month}/${day}/${year}`;
+  const dayOfWeek = daysOfWeek[date.getDay()];
+  return dayOfWeek;
+};
+
+const capitalizeWords = (inputString) => {
+  return inputString.split(' ').map(word => {
+      if (word.length === 0) return '';
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  }).join(' ');
 };
 
 const displayCurrentWeather = (data) => {
-  const { name, dt, weather, main, wind } = data;
+  const { name, dt, weather, main } = data;
   const iconUrl = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
-  const formattedDate = convertUnixTimestampToDate(dt);
+  const formattedDate = displayDay(dt);
+  const tempMin = main.temp_min.toFixed(0);
+  const tempMax = main.temp_max.toFixed(0);
+  const desc = capitalizeWords(weather[0].description);
   const currentEl = document.querySelector(".current");
   currentEl.innerHTML = `
-    <h2>${name} ${formattedDate}</h2>
-    <img src="${iconUrl}" alt="Weather Icon">
-    <p>Temp: ${main.temp} F</p>
-    <p>Humidity: ${main.humidity} %</p>
-    <p>Wind Speed: ${wind.speed} mph</p>
+  <h3>${name}</h3>
+  ${formattedDate}<img src="${iconUrl}" alt="Weather Icon">${desc} | ${tempMin}° - ${tempMax}°
   `;
 };
+
 
 const displayForecast = (data) => {
   const forecastEl = document.querySelector(".forecast");
@@ -44,16 +51,14 @@ const displayForecast = (data) => {
     const card = document.createElement("div");
     card.classList.add("five-day");
     const { city, list } = data;
-    const { name } = city;
-    const { dt, weather, main, wind } = list[i * 8 - 1];
+    const { dt, weather, main} = list[i * 8 - 1];
     const iconUrl = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
-    const formattedDate = convertUnixTimestampToDate(dt);
+    const formattedDate = displayDay(dt);
+    const tempMin = main.temp_min.toFixed(0);
+    const tempMax = main.temp_max.toFixed(0);
+    const desc = capitalizeWords(weather[0].description);
     card.innerHTML += `
-      <h3>${name} ${formattedDate}</h3>
-      <img src="${iconUrl}" alt="Weather Icon">
-      <p>Temp: ${main.temp} F</p>
-      <p>Humidity: ${main.humidity} %</p>
-      <p>Wind Speed: ${wind.speed} mph</p>
+    ${formattedDate}<img src="${iconUrl}" alt="Weather Icon">${desc} | ${tempMin}° - ${tempMax}°
     `;
     forecastEl.append(card);
   }
