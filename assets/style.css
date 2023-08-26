@@ -1,17 +1,20 @@
 header{
+    background-color: #1e2022;
     width: 100%;
     font-size: 2rem;
+    flex-direction: column;
+}
+
+header p {
+    font-size: .75rem;
 }
 
 .current {
     text-align: center;
     padding: 0 15px 0 15px;
-    background-color: #343a40;
+    background-color: #1e2022;
     color: white;
-    margin-left: 4px;
-    margin-top: 4px;
-    margin-right: 4px;
-    margin-bottom: 0px;
+    margin: 4px;
 }
 
 .forecast {
@@ -24,7 +27,7 @@ header{
 .five-day {
     text-align: center;
     padding: 0 15px 0 15px;
-    background-color: #343a40;
+    background-color: #1e2022;
     color: white;
     margin: 4px;
 }

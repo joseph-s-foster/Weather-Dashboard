@@ -30,19 +30,23 @@ const capitalizeWords = (inputString) => {
 };
 
 const displayCurrentWeather = (data) => {
-  const { name, dt, weather, main } = data;
+  const { name, weather, main, wind } = data;
   const iconUrl = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
-  const formattedDate = displayDay(dt);
+  const temp = main.temp.toFixed(0);
   const tempMin = main.temp_min.toFixed(0);
   const tempMax = main.temp_max.toFixed(0);
-  const desc = capitalizeWords(weather[0].description);
+  const feelsLike = main.feels_like.toFixed(0);
+  const humidity = main.humidity;
+  const windSpeed = wind.speed.toFixed(0);
+  // const desc = capitalizeWords(weather[0].description);
   const currentEl = document.querySelector(".current");
   currentEl.innerHTML = `
-  <h3>${name}</h3>
-  ${formattedDate}<img src="${iconUrl}" alt="Weather Icon">${desc} | ${tempMin}° - ${tempMax}°
+  Today <img src="${iconUrl}" alt="Weather Icon"><br> 
+  <h2>${temp}°</h2><br>
+  Feels like ${feelsLike}°<br>
+  L:${tempMin} - H:${tempMax}
   `;
 };
-
 
 const displayForecast = (data) => {
   const forecastEl = document.querySelector(".forecast");
@@ -50,42 +54,44 @@ const displayForecast = (data) => {
   for (let i = 1; i <= 5; i++) {
     const card = document.createElement("div");
     card.classList.add("five-day");
-    const { city, list } = data;
+    const { list } = data;
     const { dt, weather, main} = list[i * 8 - 1];
     const iconUrl = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
     const formattedDate = displayDay(dt);
-    const tempMin = main.temp_min.toFixed(0);
-    const tempMax = main.temp_max.toFixed(0);
-    const desc = capitalizeWords(weather[0].description);
+    const tempMin5 = main.temp_min.toFixed(0);
+    const tempMax5 = main.temp_max.toFixed(0);
+    // const desc = capitalizeWords(weather[0].description);
     card.innerHTML += `
-    ${formattedDate}<img src="${iconUrl}" alt="Weather Icon">${desc} | ${tempMin}° - ${tempMax}°
+    ${formattedDate}<br>
+    <img src="${iconUrl}" alt="Weather Icon"><br>
+    ${tempMin5}° - ${tempMax5}°
     `;
     forecastEl.append(card);
   }
 };
 
-const saveCityToLocalStorage = (city) => {
-  const cities = JSON.parse(localStorage.getItem("cities")) || [];
-  if (!cities.includes(city)) {
-    cities.push(city);
-    localStorage.setItem("cities", JSON.stringify(cities));
-  }
-};
+// const saveCityToLocalStorage = (city) => {
+//   const cities = JSON.parse(localStorage.getItem("cities")) || [];
+//   if (!cities.includes(city)) {
+//     cities.push(city);
+//     localStorage.setItem("cities", JSON.stringify(cities));
+//   }
+// };
 
-const populateCityButtons = () => {
-  const cities = JSON.parse(localStorage.getItem("cities")) || [];
-  const historyEl = document.querySelector(".history");
-  historyEl.innerHTML = "";
-  cities.forEach((city) => {
-    const cityButton = document.createElement("button");
-    cityButton.textContent = city;
-    cityButton.classList.add("city-button", "btn", "d-flex", "column", "btn-secondary", "mb-2");
-    cityButton.addEventListener("click", () => {
-      searchByCity(city);
-    });
-    historyEl.appendChild(cityButton);
-  });
-};
+// const populateCityButtons = () => {
+//   const cities = JSON.parse(localStorage.getItem("cities")) || [];
+//   const historyEl = document.querySelector(".history");
+//   historyEl.innerHTML = "";
+//   cities.forEach((city) => {
+//     const cityButton = document.createElement("button");
+//     cityButton.textContent = city;
+//     cityButton.classList.add("city-button", "btn", "d-flex", "column", "btn-secondary", "mb-2");
+//     cityButton.addEventListener("click", () => {
+//       searchByCity(city);
+//     });
+//     historyEl.appendChild(cityButton);
+//   });
+// };
 
 const searchByCity = async (city) => {
   const currentWeatherData = await fetchWeatherData(
@@ -107,13 +113,13 @@ document.querySelector(".search button").addEventListener("click", () => {
   }
 });
 
-document.querySelector(".clear").addEventListener("click", () => {
-  localStorage.removeItem("cities");
-  const historyEl = document.querySelector(".history");
-  historyEl.innerHTML = "";
-  console.clear();
-  window.location.replace("index.html");
-});
+// document.querySelector(".clear").addEventListener("click", () => {
+//   localStorage.removeItem("cities");
+//   const historyEl = document.querySelector(".history");
+//   historyEl.innerHTML = "";
+//   console.clear();
+//   window.location.replace("index.html");
+// });
 
 const handleSearch = async (city) => {
   const currentWeatherData = await fetchWeatherData(
@@ -126,10 +132,10 @@ const handleSearch = async (city) => {
     );
     if (forecastData) {
       displayForecast(forecastData);
-      saveCityToLocalStorage(city);
-      populateCityButtons();
+      // saveCityToLocalStorage(city);
+      // populateCityButtons();
     }
   }
 };
 
-populateCityButtons();
+// populateCityButtons();
