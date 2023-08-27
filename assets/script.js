@@ -51,22 +51,30 @@ const displayCurrentWeather = (data) => {
 const displayForecast = (data) => {
   const forecastEl = document.querySelector(".forecast");
   forecastEl.innerHTML = "";
+
   for (let i = 1; i <= 5; i++) {
-    const card = document.createElement("div");
-    card.classList.add("five-day");
     const { list } = data;
-    const { dt, weather, main} = list[i * 8 - 1];
+    const { dt, weather, main } = list[i * 8 - 1];
     const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}.png`;
     const formattedDate = displayDay(dt);
     const temp5 = main.temp.toFixed(0);
-    card.innerHTML += `
-    ${formattedDate}
-    <img src="${iconUrl}" alt="Weather Icon">
-    ${temp5}°
+
+    const card = document.createElement("div");
+    card.classList.add("five-day");
+    
+    card.innerHTML = `
+      <div class="content-wrapper">
+        <div class="left-align">${formattedDate}</div>
+        <img src="${iconUrl}" alt="Weather Icon" class="center-align">
+        <div class="right-align">${temp5}°</div>
+      </div>
     `;
+
     forecastEl.append(card);
   }
 };
+
+
 
 const saveCityToLocalStorage = (city) => {
   const cities = JSON.parse(localStorage.getItem("cities")) || [];
