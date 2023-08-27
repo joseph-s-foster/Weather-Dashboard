@@ -12,6 +12,10 @@ header {
     font-size: 2rem;
 }
 
+.btn {
+    margin-left: 8px;
+}
+
 .current {
     text-align: center;
     padding: 0 15px 0 15px;
@@ -31,7 +35,7 @@ header {
 
 @media screen and (max-width: 690px) {
     .forecast {
-        display: flex;
+        display: none;
         flex-direction: column;
     }
 }
