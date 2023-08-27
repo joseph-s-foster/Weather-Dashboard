@@ -31,20 +31,20 @@ const capitalizeWords = (inputString) => {
 
 const displayCurrentWeather = (data) => {
   const { name, weather, main, wind } = data;
-  const iconUrl = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
   const temp = main.temp.toFixed(0);
   const tempMin = main.temp_min.toFixed(0);
   const tempMax = main.temp_max.toFixed(0);
-  const feelsLike = main.feels_like.toFixed(0);
-  const humidity = main.humidity;
-  const windSpeed = wind.speed.toFixed(0);
-  // const desc = capitalizeWords(weather[0].description);
+  // const iconUrl = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
+  // const feelsLike = main.feels_like.toFixed(0);
+  // const humidity = main.humidity;
+  // const windSpeed = wind.speed.toFixed(0);
+  const desc = capitalizeWords(weather[0].description);
   const currentEl = document.querySelector(".current");
   currentEl.innerHTML = `
-  Today <img src="${iconUrl}" alt="Weather Icon"><br> 
-  <h2>${temp}°</h2><br>
-  Feels like ${feelsLike}°<br>
-  L:${tempMin} - H:${tempMax}
+  <h3>${name}<br> 
+  <h1>${temp}°</h1><br>
+  ${desc}<br>
+  L:${tempMin}° H:${tempMax}°
   `;
 };
 
@@ -56,15 +56,13 @@ const displayForecast = (data) => {
     card.classList.add("five-day");
     const { list } = data;
     const { dt, weather, main} = list[i * 8 - 1];
-    const iconUrl = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
+    const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}.png`;
     const formattedDate = displayDay(dt);
-    const tempMin5 = main.temp_min.toFixed(0);
-    const tempMax5 = main.temp_max.toFixed(0);
-    // const desc = capitalizeWords(weather[0].description);
+    const temp5 = main.temp.toFixed(0);
     card.innerHTML += `
-    ${formattedDate}<br>
-    <img src="${iconUrl}" alt="Weather Icon"><br>
-    ${tempMin5}° - ${tempMax5}°
+    ${formattedDate}
+    <img src="${iconUrl}" alt="Weather Icon">
+    ${temp5}°
     `;
     forecastEl.append(card);
   }
@@ -110,6 +108,15 @@ document.querySelector(".search button").addEventListener("click", () => {
   const city = document.querySelector(".search input").value;
   if (city) {
     handleSearch(city);
+  }
+});
+
+document.querySelector(".search input").addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    const city = document.querySelector(".search input").value;
+    if (city) {
+      handleSearch(city);
+    }
   }
 });
 

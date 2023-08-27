@@ -2,7 +2,6 @@ header{
     background-color: #1e2022;
     width: 100%;
     font-size: 2rem;
-    flex-direction: column;
 }
 
 header p {
@@ -12,16 +11,19 @@ header p {
 .current {
     text-align: center;
     padding: 0 15px 0 15px;
-    background-color: #1e2022;
-    color: white;
     margin: 4px;
 }
 
 .forecast {
     max-width: 100%;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+}
+
+@media screen and (max-width: 690px) {
+    .forecast {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .five-day {
