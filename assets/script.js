@@ -105,20 +105,27 @@ const searchByCity = async (city) => {
 };
 
 document.querySelector(".search button").addEventListener("click", () => {
-  const city = document.querySelector(".search input").value;
-  if (city) {
-    handleSearch(city);
-  }
+  search();
 });
 
 document.querySelector(".search input").addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    const city = document.querySelector(".search input").value;
-    if (city) {
-      handleSearch(city);
-    }
+    search();
   }
 });
+
+function search() {
+  const city = document.querySelector(".search input").value;
+  if (city) {
+    handleSearch(city);
+  }
+};
+
+function showForecast() {
+  const forecast = document.querySelector(".forecast");
+  forecast.style.display = "flex";
+};
+
 
 // document.querySelector(".clear").addEventListener("click", () => {
 //   localStorage.removeItem("cities");
@@ -139,6 +146,7 @@ const handleSearch = async (city) => {
     );
     if (forecastData) {
       displayForecast(forecastData);
+      showForecast();
       saveCityToLocalStorage(city);
       // populateCityButtons();
     }

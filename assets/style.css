@@ -1,11 +1,15 @@
-header{
+html,
+body {
+    background: #f6f6f6df;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+header {
     background-color: #1e2022;
     width: 100%;
     font-size: 2rem;
-}
-
-header p {
-    font-size: .75rem;
 }
 
 .current {
@@ -15,8 +19,14 @@ header p {
 }
 
 .forecast {
-    max-width: 100%;
-    width: 100%;
+    display: none;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border-width: 1px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 8px;
 }
 
 @media screen and (max-width: 690px) {
@@ -27,6 +37,7 @@ header p {
 }
 
 .five-day {
+    flex-direction: column;
     text-align: center;
     padding: 0 15px 0 15px;
     background-color: #1e2022;
