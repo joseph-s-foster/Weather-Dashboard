@@ -42,7 +42,7 @@ const displayCurrentWeather = (data) => {
   const currentEl = document.querySelector(".current");
   currentEl.innerHTML = `
   <h4>${name}</h4>
-  <h1>${temp}°</h1>
+  <h1>&nbsp;${temp}°</h1>
   ${desc}<br>
   L:${tempMin}° H:${tempMax}°
   `;
