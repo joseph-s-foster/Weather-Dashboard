@@ -7,9 +7,14 @@ body {
 }
 
 header {
+    font-weight: bold;
     background-color: #1e2022;
     width: 100%;
     font-size: 2rem;
+}
+
+.search {
+    width: 220px;
 }
 
 .btn-primary {
@@ -21,6 +26,10 @@ header {
     text-align: center;
     padding: 0 15px 0 15px;
     margin: 4px;
+}
+
+.current h1 {
+    font-size: 3rem;
 }
 
 .forecast {

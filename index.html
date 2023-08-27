@@ -15,12 +15,21 @@
 
     <main>
 
-        <header class="container-fluid d-flex text-white">
+        <header class="container-fluid d-flex justify-content-between align-items-center text-white">
             Weather
+            <div class="search">
+                <div class="input-group">
+                    <input type="text" class="form-control rounded"
+                        placeholder="Input a city and press enter">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary rounded" type="button">Search</button>
+                    </div>
+                </div>
+            </div>
         </header>
 
         <div class="container mt-5">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-3">
                     <div class="search mb-2">
                         <div class="input-group">
@@ -30,13 +39,13 @@
                                 <button class="btn btn-primary rounded" type="button">Search</button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="history"> -->
                     <!-- City buttons will be populated here -->
                     <!-- </div>
                     <button class="btn btn-danger clear">Clear History</button> -->
-                </div>
-                <div class="col-lg-6">
+                <!-- </div> -->
+                <div class="col-lg-6 mx-auto">
                     <div class="current">
                         <!-- Current weather data will be displayed here -->
                     </div>
@@ -44,6 +53,7 @@
                         <!-- 5-day forecast data will be displayed here -->
                     </div>
                 </div>
+                
             </div>
         </div>
 

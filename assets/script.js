@@ -41,7 +41,7 @@ const displayCurrentWeather = (data) => {
   const desc = capitalizeWords(weather[0].description);
   const currentEl = document.querySelector(".current");
   currentEl.innerHTML = `
-  <h3>${name}<br> 
+  <h4>${name}</h4>
   <h1>${temp}°</h1>
   ${desc}<br>
   L:${tempMin}° H:${tempMax}°

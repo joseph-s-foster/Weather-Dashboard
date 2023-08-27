@@ -13,4 +13,4 @@
 https://joseph-s-foster.github.io/Weather-Dashboard/
 
 ## Screenshot
-![Screenshot of webpage](./assets/Screenshot.png)
+![Screenshot of webpage](./assets/Screenshot.png.png)
