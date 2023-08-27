@@ -26,6 +26,15 @@ header {
 
 .form-control {
     text-align: right;
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+.form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
 }
 
 .btn-primary {
