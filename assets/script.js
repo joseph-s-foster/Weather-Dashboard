@@ -68,13 +68,13 @@ const displayForecast = (data) => {
   }
 };
 
-// const saveCityToLocalStorage = (city) => {
-//   const cities = JSON.parse(localStorage.getItem("cities")) || [];
-//   if (!cities.includes(city)) {
-//     cities.push(city);
-//     localStorage.setItem("cities", JSON.stringify(cities));
-//   }
-// };
+const saveCityToLocalStorage = (city) => {
+  const cities = JSON.parse(localStorage.getItem("cities")) || [];
+  if (!cities.includes(city)) {
+    cities.push(city);
+    localStorage.setItem("cities", JSON.stringify(cities));
+  }
+};
 
 // const populateCityButtons = () => {
 //   const cities = JSON.parse(localStorage.getItem("cities")) || [];
@@ -139,7 +139,7 @@ const handleSearch = async (city) => {
     );
     if (forecastData) {
       displayForecast(forecastData);
-      // saveCityToLocalStorage(city);
+      saveCityToLocalStorage(city);
       // populateCityButtons();
     }
   }
