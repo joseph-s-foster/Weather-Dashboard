@@ -24,8 +24,8 @@ const displayDay = (timestamp) => {
 
 const capitalizeWords = (inputString) => {
   return inputString.split(' ').map(word => {
-      if (word.length === 0) return '';
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    if (word.length === 0) return '';
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   }).join(' ');
 };
 
@@ -34,7 +34,7 @@ const displayCurrentWeather = (data) => {
   const temp = main.temp.toFixed(0);
   const tempMin = main.temp_min.toFixed(0);
   const tempMax = main.temp_max.toFixed(0);
-  const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}.png`;
+  // const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}.png`;
   // const feelsLike = main.feels_like.toFixed(0);
   // const humidity = main.humidity;
   // const windSpeed = wind.speed.toFixed(0);
@@ -43,7 +43,6 @@ const displayCurrentWeather = (data) => {
   currentEl.innerHTML = `
   <h4>${name}</h4>
   <h1>${temp}°</h1>
-  <img src="${iconUrl}" alt="Weather Icon" class="center-align"><br>
   ${desc}<br>
   L:${tempMin}° H:${tempMax}°
   `;
@@ -52,17 +51,14 @@ const displayCurrentWeather = (data) => {
 const displayForecast = (data) => {
   const forecastEl = document.querySelector(".forecast");
   forecastEl.innerHTML = "";
-
   for (let i = 1; i <= 5; i++) {
     const { list } = data;
     const { dt, weather, main } = list[i * 8 - 1];
     const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}.png`;
     const formattedDate = displayDay(dt);
     const temp5 = main.temp.toFixed(0);
-
     const card = document.createElement("div");
     card.classList.add("five-day");
-    
     card.innerHTML = `
       <div class="content-wrapper">
         <div class="left-align">${formattedDate}</div>
@@ -70,12 +66,9 @@ const displayForecast = (data) => {
         <div class="right-align">${temp5}°</div>
       </div>
     `;
-
     forecastEl.append(card);
   }
 };
-
-
 
 const saveCityToLocalStorage = (city) => {
   const cities = JSON.parse(localStorage.getItem("cities")) || [];
