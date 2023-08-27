@@ -30,7 +30,6 @@ header {
     border-width: 1px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
     margin: 0 auto;
-    max-width: 800px;
     padding: 8px;
 }
 
@@ -42,7 +41,8 @@ header {
 }
 
 .five-day {
-    flex-direction: column;
+    font-weight: bold;
+    justify-content: space-between;
     text-align: center;
     padding: 0 15px 0 15px;
     background-color: #1e2022;
