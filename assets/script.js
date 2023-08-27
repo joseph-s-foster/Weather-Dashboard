@@ -34,7 +34,7 @@ const displayCurrentWeather = (data) => {
   const temp = main.temp.toFixed(0);
   const tempMin = main.temp_min.toFixed(0);
   const tempMax = main.temp_max.toFixed(0);
-  // const iconUrl = `https://openweathermap.org/img/w/${weather[0].icon}.png`;
+  const iconUrl = `https://openweathermap.org/img/wn/${weather[0].icon}.png`;
   // const feelsLike = main.feels_like.toFixed(0);
   // const humidity = main.humidity;
   // const windSpeed = wind.speed.toFixed(0);
@@ -43,6 +43,7 @@ const displayCurrentWeather = (data) => {
   currentEl.innerHTML = `
   <h4>${name}</h4>
   <h1>${temp}°</h1>
+  <img src="${iconUrl}" alt="Weather Icon" class="center-align"><br>
   ${desc}<br>
   L:${tempMin}° H:${tempMax}°
   `;

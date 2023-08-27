@@ -14,7 +14,11 @@ header {
 }
 
 .search {
-    width: 200px;
+    width: 225px;
+}
+
+.form-control {
+    text-align: right;
 }
 
 .btn-primary {
@@ -29,7 +33,11 @@ header {
 }
 
 .current h1 {
-    font-size: 3rem;
+    font-size: 4rem;
+}
+
+.current h4 {
+    font-size: 1.75rem;
 }
 
 .forecast {
