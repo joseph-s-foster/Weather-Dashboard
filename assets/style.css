@@ -12,7 +12,8 @@ header {
     font-size: 2rem;
 }
 
-.btn {
+.btn-primary {
+    display: none;
     margin-left: 8px;
 }
 
