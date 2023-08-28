@@ -51,6 +51,12 @@ const displayCurrentWeather = (data) => {
 const displayForecast = (data) => {
   const forecastEl = document.querySelector(".forecast");
   forecastEl.innerHTML = "";
+  const forecastTitle = document.createElement("p");
+  forecastTitle.classList.add("title");
+  forecastTitle.textContent = "5-DAY FORECAST";
+  forecastTitle.style.textAlign = "left";
+  forecastEl.appendChild(forecastTitle);
+
   for (let i = 1; i <= 5; i++) {
     const { list } = data;
     const { dt, weather, main } = list[i * 8 - 1];
@@ -127,7 +133,6 @@ function showForecast() {
   const forecast = document.querySelector(".forecast");
   forecast.style.display = "flex";
 };
-
 
 // document.querySelector(".clear").addEventListener("click", () => {
 //   localStorage.removeItem("cities");
