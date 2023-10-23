@@ -25,7 +25,7 @@ header {
 }
 
 .form-control {
-    text-align: right;
+    text-align: left;
     outline: none;
     box-shadow: none;
     border: none;
